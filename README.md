@@ -12,3 +12,6 @@ Tools for RPi automation
 - dynamic DNS duckdns
 - HomeBridge LIFX
 - NAS WOL
+## Ultimate
+- Touch Screen Kiosk
+- openCV people recognition
