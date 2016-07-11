@@ -1,0 +1,6 @@
+[submodule "OpenVPN-Setup"]
+	path = OpenVPN-Setup
+	url = https://github.com/StarshipEngineer/OpenVPN-Setup.git
+[submodule "ddns-setup"]
+	path = ddns-setup
+	url = https://github.com/StarshipEngineer/ddns-setup.git
