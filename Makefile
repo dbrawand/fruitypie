@@ -22,7 +22,8 @@ requirements:
 		libglu1-mesa libglu1-mesa-dev libgl1-mesa-glx libgl1-mesa-dev
 	apt-get install qtdeclarative5-dev
 	apt-get install --reinstall libgl1-mesa-glx
-	apt-get install mosh
+	apt-get install -y mosh
+	apt-get install -y fail2ban
 
 venv:
 	pip install virtualenv
