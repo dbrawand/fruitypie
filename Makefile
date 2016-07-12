@@ -16,12 +16,13 @@ requirements:
 		qt4-dev-tools qt4-designer libqtgui4 libqtcore4	libqt4-xml libqt4-test \
 		libqt4-script libqt4-network libqt4-dbus python-qt4 python-qt4-gl libgle3
 	apt-get install -y git ffmpeg libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev \
-    libsdl2-ttf-dev libportmidi-dev libswscale-dev libavformat-dev \
-    libavcodec-dev zlib1g-dev
+		libsdl2-ttf-dev libportmidi-dev libswscale-dev libavformat-dev \
+		libavcodec-dev zlib1g-dev
 	apt-get install -y opengl freeglut3 freeglut3-dev libglew1.5 libglew1.5-dev \
 		libglu1-mesa libglu1-mesa-dev libgl1-mesa-glx libgl1-mesa-dev
 	apt-get install qtdeclarative5-dev
-  apt-get install --reinstall libgl1-mesa-glx
+	apt-get install --reinstall libgl1-mesa-glx
+	apt-get install mosh
 
 venv:
 	pip install virtualenv
@@ -30,8 +31,7 @@ venv:
 
 # run openvpn setup
 openvpn:
-	cd OpenVPN-Setup && \
-		setup.sh
+	curl -L https://install.pivpn.io | bash
 
 # install dyndns
 dyndns:
