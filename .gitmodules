@@ -4,3 +4,6 @@
 [submodule "ddns-setup"]
 	path = ddns-setup
 	url = https://github.com/StarshipEngineer/ddns-setup.git
+[submodule "kivy-designer"]
+	path = kivy-designer
+	url = https://github.com/kivy/kivy-designer.git
