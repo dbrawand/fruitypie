@@ -1,0 +1,4 @@
+[ssh]
+banaction = iptables-allports
+bantime = -1
+maxretry = 2

@@ -23,7 +23,22 @@ requirements:
 	apt-get install qtdeclarative5-dev
 	apt-get install --reinstall libgl1-mesa-glx
 	apt-get install -y mosh
+
+# secure RPi
+secure:
+	apt-get install -y rpi-update
+	rpi-update
+	# stengthen SSH policies (no external password authentication)
+	cp secure/sshd_config /etc/ssh/sshd_config
+	# install and configure fail2ban
 	apt-get install -y fail2ban
+	cp secure/jail.conf /etc/fail2ban/
+	cp secure/jail.local /etc/fail2ban/
+	cp secure/fail2ban.conf /etc/fail2ban/
+	cp secure/iptables-allports.conf /etc/fail2ban/action.d/
+
+fail2ban-check:
+	iptables -L -n --line
 
 venv:
 	pip install virtualenv
