@@ -1,0 +1,4 @@
+# REPLACE API KEY AND DOMAIN
+# crontab -e
+# */5 * * * * ~/fruitypie/duckdns/duck.sh >/dev/null 2>&1
+# sudo service cron start

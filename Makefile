@@ -24,6 +24,11 @@ requirements:
 	apt-get install --reinstall libgl1-mesa-glx
 	apt-get install -y mosh
 
+# dynamic DNS (duckdns)
+ddns:
+	mkdir $(HOME)/duckdns
+	cp duckdns/duck.sh $(HOME)/duckdns/duck.sh
+
 # secure RPi
 secure:
 	apt-get install -y rpi-update
