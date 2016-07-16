@@ -10,18 +10,11 @@ all: openvpn dyndns wemo
 
 requirements:
 	apt-get update
-	apt-get upgrade
-	apt-get install -y build-essential autoconf libtool pkg-config python-opengl \
-		python-imaging python-pyrex python-pyside.qtopengl idle-python2.7 python-dev \
-		qt4-dev-tools qt4-designer libqtgui4 libqtcore4	libqt4-xml libqt4-test \
-		libqt4-script libqt4-network libqt4-dbus python-qt4 python-qt4-gl libgle3
-	apt-get install -y git ffmpeg libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev \
-		libsdl2-ttf-dev libportmidi-dev libswscale-dev libavformat-dev \
-		libavcodec-dev zlib1g-dev
-	apt-get install -y opengl freeglut3 freeglut3-dev libglew1.5 libglew1.5-dev \
-		libglu1-mesa libglu1-mesa-dev libgl1-mesa-glx libgl1-mesa-dev
-	apt-get install qtdeclarative5-dev
-	apt-get install --reinstall libgl1-mesa-glx
+	apt-get upgrade -y
+	apt-get dist-upgrade
+	apt-get install -y raspberrypi-ui-mods
+	apt-get install -y raspberrypi-net-mods
+	apt-get install -y git
 	apt-get install -y mosh
 
 # dynamic DNS (duckdns)
@@ -79,6 +72,35 @@ wemo-cron: wemo-install
 	# setup powerlog
 
 # KIVY stuff
+kivy-install:
+	echo "deb http://vontaene.de/raspbian-updates/ . main" >> /etc/apt/sources.list
+	gpg --keyserver pgp.mit.edu --recv-keys 0C667A3E
+	gpg -a --export 0C667A3E | sudo apt-key add -
+	apt-get update
+	apt-get -y install pkg-config libgl1-mesa-dev libgles2-mesa-dev \
+		python-pygame python-setuptools libgstreamer1.0-dev git-core \
+		gstreamer1.0-plugins-{bad,base,good,ugly} \
+		gstreamer1.0-{omx,alsa} python-dev
+	wget https://raw.github.com/pypa/pip/master/contrib/get-pip.py && \
+		python get-pip.py
+	pip install cython pygments docutils
+	git clone https://github.com/kivy/kivy && \
+		cd kivy && \
+		python setup.py build && \
+ 		python setup.py install
+
+kivy-requirements:
+	apt-get install -y build-essential autoconf libtool pkg-config python-opengl \
+		python-imaging python-pyrex python-pyside.qtopengl idle-python2.7 python-dev \
+		qt4-dev-tools qt4-designer libqtgui4 libqtcore4	libqt4-xml libqt4-test \
+		libqt4-script libqt4-network libqt4-dbus python-qt4 python-qt4-gl libgle3
+	apt-get install -y ffmpeg libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev \
+		libsdl2-ttf-dev libportmidi-dev libswscale-dev libavformat-dev \
+		libavcodec-dev zlib1g-dev
+	apt-get install -y opengl freeglut3 freeglut3-dev libglew1.5 libglew1.5-dev \
+		libglu1-mesa libglu1-mesa-dev libgl1-mesa-glx libgl1-mesa-dev
+	apt-get install qtdeclarative5-dev
+	apt-get install --reinstall libgl1-mesa-glx
 
 KIVYDESIGNER=kivy-designer
 kivy:
