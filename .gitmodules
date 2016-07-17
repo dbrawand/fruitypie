@@ -4,3 +4,6 @@
 [submodule "kivy-designer"]
 	path = kivy-designer
 	url = https://github.com/kivy/kivy-designer.git
+[submodule "rpi-kivy-screen"]
+	path = rpi-kivy-screen
+	url = https://github.com/mrichardson23/rpi-kivy-screen.git

@@ -88,20 +88,5 @@ kivy-install:
 		cd kivy && \
 		python setup.py build && \
  		python setup.py install
+	mkdir -p $(HOME)/.kivy && cp kivy/config.ini $(HOME)/.kivy/
 
-kivy-requirements:
-	apt-get install -y build-essential autoconf libtool pkg-config python-opengl \
-		python-imaging python-pyrex python-pyside.qtopengl idle-python2.7 python-dev \
-		qt4-dev-tools qt4-designer libqtgui4 libqtcore4	libqt4-xml libqt4-test \
-		libqt4-script libqt4-network libqt4-dbus python-qt4 python-qt4-gl libgle3
-	apt-get install -y ffmpeg libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev \
-		libsdl2-ttf-dev libportmidi-dev libswscale-dev libavformat-dev \
-		libavcodec-dev zlib1g-dev
-	apt-get install -y opengl freeglut3 freeglut3-dev libglew1.5 libglew1.5-dev \
-		libglu1-mesa libglu1-mesa-dev libgl1-mesa-glx libgl1-mesa-dev
-	apt-get install qtdeclarative5-dev
-	apt-get install --reinstall libgl1-mesa-glx
-
-KIVYDESIGNER=kivy-designer
-kivy:
-	$(PIP) install -r $(KIVYDESIGNER)/requirements.txt
