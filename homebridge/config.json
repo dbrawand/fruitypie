@@ -1,0 +1,38 @@
+{
+    "bridge": {
+        "name": "Homebridge",
+        "username": "CC:22:3D:E3:CE:30",
+        "port": 51826,
+        "pin": "031-45-154"
+    },
+    "accessories": [
+        {
+            "accessory": "WeMo",
+            "name": "tower",
+            "description": "unraid server",
+            "wemo_name": "tower"
+        },
+        {
+            "accessory": "Sonos",
+            "name": "Bedroom Speakers",
+            "room": "Bedroom"
+        },
+        {
+            "accessory": "Sony",
+            "name": "TV",
+            "mac": "34:68:95:68:3b:1f",
+            "ip": "192.168.1.66"
+        }
+    ],
+    "platforms": [
+        {
+             "platform": "LifxLan",
+             "name": "LiFx"
+        },
+        {
+            "platform": "Server",
+            "port": 8765,
+            "name": "Homebridge Server"
+        }
+    ]
+}

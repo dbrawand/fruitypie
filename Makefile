@@ -17,7 +17,7 @@ requirements:
 	apt-get install -y git
 	apt-get install -y mosh
 
-# NFSv4 server
+# NFSv4 server (needs fixing)
 nfs:
 	apt-get install -y nfs-common nfs-kernel-server
 	mkdir -p /srv/nfs4 && ln -s $(HOME) /srv/nfs4/share
@@ -35,6 +35,62 @@ nfs:
 	# add IPv6 module
 	echo "ipv6" >> /etc/modules
 	## nfs://vers=4,192.168.1.77/home/pi
+
+# install node
+node:
+	wget https://nodejs.org/dist/v4.3.2/node-v4.3.2-linux-armv6l.tar.gz
+	tar -xvf node-v4.3.2-linux-armv6l.tar.gz
+	cd node-v4.3.2-linux-armv6l
+	sudo cp -R * /usr/local/
+
+# homebridge
+homebridge: node
+	apt-get install -y libavahi-compat-libdnssd-dev
+  npm install -g homebridge --unsafe-perm
+	npm install -g lru-cache --update
+	npm install -g homebridge-lifx-lan
+	npm install -g homebridge-wemo
+	npm install -g homebridge-sonos
+	npm install -g homebridge-sonytvon
+	npm install -g homebridge-server
+
+	## future
+	# npm install -g homebridge-wakeonlan
+	# npm install -g homebridge-wol
+	# npm install -g homebridge-platform-wemo
+	# npm install -g homebridge-unicorn
+	# npm install -g homebridge-lifx
+	# npm install -g homebridge-sonytvremote
+	# npm install -g homebridge-myflowerpower
+	# npm install -g homebridge-ifttt
+
+	# install start on bootup
+	useradd --system homebridge
+	cp homebridge/homebridge /etc/default/
+	cp homebridge/homebridge.service /etc/systemd/system/
+	mkdir -p /var/homebridge
+	cp homebridge/config.json /var/homebridge/
+	systemctl daemon-reload
+	systemctl enable homebridge
+	systemctl start homebridge
+
+# flic server (WIP, deferred until easy daemon implementation exists)
+flic:
+	# install prereq
+	apt-get install -y git libglib2.0-0 libglib2.0-dev libdbus-1-dev libudev-dev \
+		automake libtool libical-dev libreadline-dev libjson-glib-1.0-0
+	apt-get install -y libsoup2.4-1
+	# install bluez
+	git clone git://git.kernel.org/pub/scm/bluetooth/bluez.git && \
+		cd bluez && git checkout 5.37 && \
+		./bootstrap && ./configure --enable-experimental --enable-library && \
+		make && make install
+
+# install latest wemo
+wemo:
+	apt-get install python-setuptools python-dev
+	pip install git+git://github.com/iancmcc/ouimeaux.git@develop
+	python homopie/wemo.py
 
 # dynamic DNS (duckdns)
 ddns:
