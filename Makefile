@@ -21,7 +21,7 @@ requirements:
 nfs:
 	apt-get install -y nfs-common nfs-kernel-server
 	mkdir -p /srv/nfs4 && ln -s $(HOME) /srv/nfs4/share
-	echo "/srv/nfs4/share apfelbuch(rw,sync,no_subtree_check)" >> /etc/exports
+	echo "/srv/nfs4/share 192.168.1.0/24 *(rw,sync,no_subtree_check)" >> /etc/exports
 	# backup scripts
 	cp /etc/init.d/nfs-kernel-server /etc/init.d/nfs-kernel-server.pristine
 	cp /etc/default/nfs-kernel-server /etc/default/nfs-kernel-server.pristine
@@ -32,7 +32,9 @@ nfs:
 	cp nfs/nfs-common /etc/default/nfs-common
 	# start NFS server
 	service nfs-kernel-server start
-
+	# add IPv6 module
+	echo "ipv6" >> /etc/modules
+	## nfs://vers=4,192.168.1.77/home/pi
 
 # dynamic DNS (duckdns)
 ddns:
