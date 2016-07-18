@@ -17,6 +17,23 @@ requirements:
 	apt-get install -y git
 	apt-get install -y mosh
 
+# NFSv4 server
+nfs:
+	apt-get install -y nfs-common nfs-kernel-server
+	mkdir -p /srv/nfs4 && ln -s $(HOME) /srv/nfs4/share
+	echo "/srv/nfs4/share apfelbuch(rw,sync,no_subtree_check)" >> /etc/exports
+	# backup scripts
+	cp /etc/init.d/nfs-kernel-server /etc/init.d/nfs-kernel-server.pristine
+	cp /etc/default/nfs-kernel-server /etc/default/nfs-kernel-server.pristine
+	cp /etc/default/nfs-common /etc/default/nfs-common.pristine
+	# copy RPi NFS init scripts
+	cp nfs/nfs-kernel-server.script /etc/init.d/nfs-kernel-server
+	cp nfs/nfs-kernel-server.cfg /etc/default/nfs-kernel-server
+	cp nfs/nfs-common /etc/default/nfs-common
+	# start NFS server
+	service nfs-kernel-server start
+
+
 # dynamic DNS (duckdns)
 ddns:
 	mkdir $(HOME)/duckdns
