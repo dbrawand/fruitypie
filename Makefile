@@ -78,15 +78,19 @@ kivy-install:
 	gpg -a --export 0C667A3E | sudo apt-key add -
 	apt-get update
 	apt-get -y install pkg-config libgl1-mesa-dev libgles2-mesa-dev \
-		python-pygame python-setuptools libgstreamer1.0-dev git-core \
-		gstreamer1.0-plugins-{bad,base,good,ugly} \
-		gstreamer1.0-{omx,alsa} python-dev
-	wget https://raw.github.com/pypa/pip/master/contrib/get-pip.py && \
-		python get-pip.py
+		python-pygame python-setuptools \
+		libgstreamer1.0-dev \
+		gstreamer1.0-plugins-bad \
+		gstreamer1.0-plugins-base \
+		gstreamer1.0-plugins-good \
+		gstreamer1.0-plugins-ugly \
+		gstreamer1.0-omx \
+		gstreamer1.0-alsa \
+		python-dev
+	pip install pip --upgrade
 	pip install cython pygments docutils
 	git clone https://github.com/kivy/kivy && \
 		cd kivy && \
 		python setup.py build && \
  		python setup.py install
 	mkdir -p $(HOME)/.kivy && cp kivy/config.ini $(HOME)/.kivy/
-
